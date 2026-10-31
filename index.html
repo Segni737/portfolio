@@ -60,14 +60,19 @@
           </div>
         </div>
       </div>
-      <button id="menu-button" class="grid h-10 w-10 place-items-center rounded-lg border border-line text-slate-200 md:hidden" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
-        <svg id="menu-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <div class="hidden items-center gap-8 text-sm text-slate-400 md:flex">
-        <a class="transition hover:text-white" href="#about">About</a>
-        <a class="transition hover:text-white" href="#skills">Skills</a>
-        <a class="transition hover:text-white" href="#projects">Projects</a>
-        <a href="#contact" class="rounded-lg border border-mint/40 px-4 py-2 font-semibold text-mint transition hover:bg-mint hover:text-ink">Let's talk <span aria-hidden="true">↗</span></a>
+      <div class="flex items-center gap-3 md:gap-8">
+        <div class="hidden items-center gap-8 text-sm text-slate-400 md:flex">
+          <a class="transition hover:text-white" href="#about">About</a>
+          <a class="transition hover:text-white" href="#skills">Skills</a>
+          <a class="transition hover:text-white" href="#projects">Projects</a>
+          <a href="#contact" class="rounded-lg border border-mint/40 px-4 py-2 font-semibold text-mint transition hover:bg-mint hover:text-ink">Let's talk <span aria-hidden="true">↗</span></a>
+        </div>
+        <button id="theme-toggle" type="button" class="grid h-10 w-10 place-items-center rounded-lg border border-line text-slate-200 transition hover:bg-white/5" aria-label="Switch to light theme" aria-pressed="false" title="Switch to light theme">
+          <svg id="theme-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+        <button id="menu-button" class="grid h-10 w-10 place-items-center rounded-lg border border-line text-slate-200 md:hidden" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="menu-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
     </nav>
     <div id="mobile-menu" class="hidden border-t border-white/[.06] bg-ink/95 px-5 py-5 md:hidden">
@@ -286,6 +291,8 @@
     const menuButton = document.getElementById("menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
     const menuIcon = document.getElementById("menu-icon");
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
     const profileToggle = document.getElementById("profile-toggle");
     const profileCard = document.getElementById("profile-card");
     const profileClose = document.getElementById("profile-close");
@@ -299,6 +306,16 @@
       setProfileOpen(profileToggle.getAttribute("aria-expanded") !== "true");
     });
     profileClose.addEventListener("click", () => setProfileOpen(false));
+    themeToggle.addEventListener("click", () => {
+      const isLight = document.body.dataset.theme !== "light";
+      document.body.dataset.theme = isLight ? "light" : "dark";
+      themeToggle.setAttribute("aria-pressed", String(isLight));
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+      themeToggle.title = isLight ? "Switch to dark theme" : "Switch to light theme";
+      themeIcon.innerHTML = isLight
+        ? '<path stroke-linecap="round" stroke-linejoin="round" d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>'
+        : '<circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>';
+    });
     document.addEventListener("click", (event) => {
       if (!profileCard.contains(event.target) && !profileToggle.contains(event.target)) {
         setProfileOpen(false);
