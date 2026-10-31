@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d12">
+  <meta name="description" content="Segni Mamo is a mobile, web, and IoT developer building useful software and connected experiences.">
+  <title>Segni Mamo — Developer &amp; Builder</title>
+
+  <!-- Tailwind CSS utilities are loaded via CDN. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#090d12",
+            panel: "#101720",
+            line: "#202b37",
+            mint: "#a3f7bf",
+            muted: "#9ba9b7"
+          },
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            mono: ["SFMono-Regular", "Consolas", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-ink text-slate-100 antialiased selection:bg-mint selection:text-ink">
+  <!-- Decorative background grid -->
+  <div aria-hidden="true" class="grid-glow pointer-events-none fixed inset-0 z-0"></div>
+
+  <!-- Navigation -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/[.06] glass">
+    <nav class="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-5 sm:px-8" aria-label="Main navigation">
+      <div class="relative">
+        <button id="profile-toggle" type="button" class="flex items-center gap-3" aria-label="Open Segni Mamo profile" aria-expanded="false" aria-controls="profile-card">
+        <span class="h-9 w-9 overflow-hidden rounded-full border border-mint/30 bg-mint/10">
+          <img src="assets/profile.jpg" alt="" aria-hidden="true" class="h-full w-full object-cover object-center">
+        </span>
+        <span class="font-bold tracking-tight">segni<span class="text-mint">.</span></span>
+        </button>
+        <div id="profile-card" class="glass absolute left-0 top-full z-50 mt-3 hidden w-[min(18rem,calc(100vw-2.5rem))] rounded-2xl border border-line p-4 shadow-2xl shadow-black/40" role="dialog" aria-label="Segni Mamo profile">
+          <div class="flex items-center gap-4">
+            <img src="assets/profile.jpg" alt="Segni Mamo" class="h-16 w-16 shrink-0 rounded-full border border-mint/30 object-cover object-center">
+            <div class="min-w-0">
+              <p class="truncate text-base font-bold text-white">Segni Mamo</p>
+              <p class="mt-1 text-sm text-slate-400">Software Developer</p>
+            </div>
+            <button id="profile-close" type="button" class="ml-auto grid h-8 w-8 shrink-0 place-items-center rounded-lg text-slate-400 transition hover:bg-white/5 hover:text-white" aria-label="Close profile card">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button id="menu-button" class="grid h-10 w-10 place-items-center rounded-lg border border-line text-slate-200 md:hidden" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg id="menu-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="hidden items-center gap-8 text-sm text-slate-400 md:flex">
+        <a class="transition hover:text-white" href="#about">About</a>
+        <a class="transition hover:text-white" href="#skills">Skills</a>
+        <a class="transition hover:text-white" href="#projects">Projects</a>
+        <a href="#contact" class="rounded-lg border border-mint/40 px-4 py-2 font-semibold text-mint transition hover:bg-mint hover:text-ink">Let's talk <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden border-t border-white/[.06] bg-ink/95 px-5 py-5 md:hidden">
+      <div class="mx-auto flex max-w-6xl flex-col gap-1 text-sm text-slate-300">
+        <a class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5" href="#about">About</a>
+        <a class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5" href="#skills">Skills</a>
+        <a class="mobile-link rounded-lg px-3 py-3 hover:bg-white/5" href="#projects">Projects</a>
+        <a class="mobile-link rounded-lg px-3 py-3 text-mint hover:bg-white/5" href="#contact">Let's talk ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <!-- Hero -->
+    <section id="home" class="relative flex min-h-[760px] scroll-mt-24 items-center overflow-hidden pt-28 sm:min-h-[820px]">
+      <div aria-hidden="true" class="absolute -right-32 top-28 h-[440px] w-[440px] rounded-full bg-mint/[.07] blur-[120px]"></div>
+      <div class="mx-auto grid w-full max-w-6xl items-center gap-14 px-5 pb-24 pt-12 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-16 lg:pb-32">
+        <div>
+          <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-line bg-white/[.025] px-3.5 py-2 font-mono text-xs text-slate-300">
+            <span class="relative flex h-2 w-2"><span class="availability-ping absolute inline-flex h-full w-full rounded-full bg-mint opacity-80"></span><span class="availability-dot relative inline-flex h-2 w-2 rounded-full bg-mint"></span></span>
+            OPEN TO COLLABORATION
+          </div>
+          <p class="mb-3 font-mono text-sm tracking-wide text-mint">Hello, I am</p>
+          <h1 class="pb-3 text-5xl font-extrabold leading-[1.25] tracking-[-.055em] text-gradient sm:text-7xl lg:text-[5.5rem]">Segni Mamo<span class="text-mint">.</span></h1>
+          <h2 class="mt-6 max-w-2xl text-xl font-semibold leading-relaxed text-slate-200 sm:text-2xl">
+            <span class="text-mint">Software Developer</span>
+          </h2>
+          <p class="mt-5 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+            I build thoughtful digital experiences, secure mobile apps, and connected systems that bring software and hardware together.
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="#projects" class="inline-flex items-center justify-center gap-2 rounded-lg bg-mint px-5 py-3.5 text-sm font-bold text-ink transition hover:bg-white">
+              Explore my work <span aria-hidden="true">↓</span>
+            </a>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-lg border border-line px-5 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-white/[.04]">
+              Get in touch <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="mt-12 flex items-center gap-4 text-xs text-slate-500">
+            <span class="font-mono uppercase tracking-[.16em]">Building with</span>
+            <span class="h-px w-9 bg-line"></span>
+            <span>Kotlin</span><span class="text-slate-700">/</span><span>JavaScript</span><span class="text-slate-700">/</span><span>ESP32</span>
+          </div>
+        </div>
+
+        <!-- Code-inspired profile visual -->
+        <div class="relative mx-auto w-full max-w-md">
+          <div aria-hidden="true" class="absolute -inset-5 rounded-3xl border border-mint/[.08]"></div>
+          <div class="relative overflow-hidden rounded-2xl border border-line bg-[#0d131a] shadow-2xl shadow-black/30">
+            <div class="flex items-center justify-between border-b border-line px-5 py-4">
+              <div class="flex gap-1.5" aria-hidden="true"><span class="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]/80"></span><span class="h-2.5 w-2.5 rounded-full bg-[#ffd166]/80"></span><span class="h-2.5 w-2.5 rounded-full bg-mint/80"></span></div>
+              <span class="font-mono text-[11px] text-slate-500">segni_mamo.kt</span>
+              <span class="font-mono text-[10px] text-slate-600">KOTLIN</span>
+            </div>
+            <div class="space-y-3 px-5 py-7 font-mono text-[12px] leading-6 sm:px-7 sm:text-[13px]">
+              <p><span class="text-[#c792ea]">class</span> <span class="text-[#82aaff]">Developer</span> {</p>
+              <p class="pl-5"><span class="text-[#c792ea]">val</span> name = <span class="text-[#c3e88d]">"Segni Mamo"</span></p>
+              <p class="pl-5"><span class="text-[#c792ea]">val</span> focus = <span class="text-[#c3e88d]">listOf</span>(</p>
+              <p class="pl-10 text-slate-400"><span class="text-[#c3e88d]">"Mobile apps"</span>,</p>
+              <p class="pl-10 text-slate-400"><span class="text-[#c3e88d]">"Web experiences"</span>,</p>
+              <p class="pl-10 text-slate-400"><span class="text-[#c3e88d]">"Connected devices"</span></p>
+              <p class="pl-5">)</p>
+              <p class="pl-5"><span class="text-[#c792ea]">fun</span> <span class="text-[#82aaff]">build</span>() = <span class="text-mint">ideas.toReality()</span></p>
+              <p>}</p>
+              <div class="mt-7 flex items-center gap-3 rounded-lg border border-mint/10 bg-mint/[.04] px-4 py-3">
+                <span class="grid h-8 w-8 place-items-center rounded-md bg-mint/10 text-mint" aria-hidden="true">✳</span>
+                <div><p class="font-sans text-xs font-semibold text-slate-200">Curiosity → creation</p><p class="mt-0.5 font-sans text-[11px] text-slate-500">From the first sketch to the final build.</p></div>
+                <span class="ml-auto font-mono text-[10px] text-mint">01</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="scroll-mt-24 border-y border-white/[.05] bg-white/[.015]">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[.7fr_1.3fr] lg:gap-20 lg:py-28">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-mint">01 / About</p>
+          <h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Engineer by mindset.<br><span class="text-slate-500">Builder by nature.</span></h2>
+        </div>
+        <div class="max-w-3xl">
+          <p class="text-lg leading-8 text-slate-300">
+            I'm a developer with an engineering background and a passion for creating useful things—whether that's an intuitive Android app, a clean web experience, or a device that connects the physical and digital worlds.
+          </p>
+          <p class="mt-5 leading-7 text-muted">
+            I enjoy working across the stack, learning how systems fit together, and paying close attention to privacy and security. From exploring encryption in mobile apps to integrating sensors with microcontrollers, I like turning complex ideas into practical, approachable products.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="rounded-full border border-line px-3 py-1.5 font-mono text-[11px] text-slate-400">Engineering mindset</span>
+            <span class="rounded-full border border-line px-3 py-1.5 font-mono text-[11px] text-slate-400">Security conscious</span>
+            <span class="rounded-full border border-line px-3 py-1.5 font-mono text-[11px] text-slate-400">Always learning</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-5 py-24 sm:px-8 lg:py-28">
+        <div class="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div><p class="font-mono text-xs uppercase tracking-[.2em] text-mint">02 / Toolkit</p><h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Tools I work with</h2></div>
+          <p class="max-w-md text-sm leading-6 text-muted">A versatile toolkit for crafting apps, building the web, and bringing connected hardware to life.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="rounded-xl border border-line bg-panel/70 p-5">
+            <div class="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-mint/10 font-mono text-sm text-mint">01</div>
+            <h3 class="font-bold">Mobile Development</h3>
+            <p class="mt-1 text-xs text-slate-500">Native Android experiences</p>
+            <div class="mt-5 flex flex-wrap gap-2"><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">Kotlin</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">Jetpack Compose</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">Android Studio</span></div>
+          </article>
+          <article class="rounded-xl border border-line bg-panel/70 p-5">
+            <div class="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-mint/10 font-mono text-sm text-mint">02</div>
+            <h3 class="font-bold">Web Development</h3>
+            <p class="mt-1 text-xs text-slate-500">Responsive, full-stack web</p>
+            <div class="mt-5 flex flex-wrap gap-2"><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">HTML / CSS</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">JavaScript</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">PHP</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">MySQL</span></div>
+          </article>
+          <article class="rounded-xl border border-line bg-panel/70 p-5">
+            <div class="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-mint/10 font-mono text-sm text-mint">03</div>
+            <h3 class="font-bold">Embedded &amp; IoT</h3>
+            <p class="mt-1 text-xs text-slate-500">Hardware meets software</p>
+            <div class="mt-5 flex flex-wrap gap-2"><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">Arduino</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">ESP32</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">Python</span></div>
+          </article>
+          <article class="rounded-xl border border-line bg-panel/70 p-5">
+            <div class="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-mint/10 font-mono text-sm text-mint">04</div>
+            <h3 class="font-bold">Tools &amp; Workflow</h3>
+            <p class="mt-1 text-xs text-slate-500">Build, version, collaborate</p>
+            <div class="mt-5 flex flex-wrap gap-2"><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">Git</span><span class="skill-chip rounded-md border border-line px-2.5 py-1.5 text-xs text-slate-300">GitHub</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="scroll-mt-24 border-y border-white/[.05] bg-white/[.015]">
+      <div class="mx-auto max-w-6xl px-5 py-24 sm:px-8 lg:py-28">
+        <div class="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div><p class="font-mono text-xs uppercase tracking-[.2em] text-mint">03 / Selected work</p><h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Projects with purpose</h2></div>
+          <p class="max-w-md text-sm leading-6 text-muted">A snapshot of what I enjoy building: human-centered apps, practical security, and connected devices.</p>
+        </div>
+        <div class="grid gap-5 lg:grid-cols-3">
+          <article class="project-card flex flex-col rounded-xl border border-line bg-panel/75 p-6">
+            <div class="mb-8 flex items-start justify-between">
+              <div class="grid h-12 w-12 place-items-center rounded-xl border border-mint/15 bg-mint/[.07] text-xl text-mint" aria-hidden="true">♡</div>
+              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-slate-500">Android app</span>
+            </div>
+            <h3 class="text-xl font-bold">Talkie</h3>
+            <p class="mt-3 flex-1 text-sm leading-6 text-muted">A native Android chat platform designed to help people connect. Includes local payment flows with Telebirr and Arifpay.</p>
+            <div class="mt-6 flex flex-wrap gap-2"><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">Kotlin</span><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">Jetpack Compose</span><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">Payments</span></div>
+            <span class="mt-7 inline-flex w-fit items-center gap-2 text-sm font-semibold text-slate-300">Project repository</span>
+          </article>
+          <article class="project-card flex flex-col rounded-xl border border-line bg-panel/75 p-6">
+            <div class="mb-8 flex items-start justify-between">
+              <div class="grid h-12 w-12 place-items-center rounded-xl border border-mint/15 bg-mint/[.07] text-mint" aria-hidden="true">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 16.5v-9Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m3.5 17 5.8-5.8a2 2 0 0 1 2.8 0l1.2 1.2 1.2-1.2a2 2 0 0 1 2.8 0l3.2 3.2M8 9h.01"/><path stroke-linecap="round" d="m9 15 2-2 2 2"/></svg>
+              </div>
+              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-slate-500">Security</span>
+            </div>
+            <h3 class="text-xl font-bold">Steganography &amp; AES</h3>
+            <p class="mt-3 flex-1 text-sm leading-6 text-muted">An Android security app that encrypts secret text and conceals it inside images, combining cryptography with image steganography.</p>
+            <div class="mt-6 flex flex-wrap gap-2"><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">Android</span><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">AES</span><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">Steganography</span></div>
+            <span class="mt-7 inline-flex w-fit items-center gap-2 text-sm font-semibold text-slate-300">Project repository</span>
+          </article>
+          <article class="project-card flex flex-col rounded-xl border border-line bg-panel/75 p-6">
+            <div class="mb-8 flex items-start justify-between">
+              <div class="grid h-12 w-12 place-items-center rounded-xl border border-mint/15 bg-mint/[.07] text-mint" aria-hidden="true">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M4.93 4.93l2.12 2.12m9.9 9.9 2.12 2.12M3 12h3m12 0h3M4.93 19.07l2.12-2.12m9.9-9.9 2.12-2.12"/><circle cx="12" cy="12" r="5"/></svg>
+              </div>
+              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-slate-500">IoT / Embedded</span>
+            </div>
+            <h3 class="text-xl font-bold">Connected Systems</h3>
+            <p class="mt-3 flex-1 text-sm leading-6 text-muted">Hardware-software integration projects using microcontrollers to connect sensors, devices, and software into practical solutions.</p>
+            <div class="mt-6 flex flex-wrap gap-2"><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">Arduino</span><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">ESP32</span><span class="rounded-md bg-white/[.05] px-2.5 py-1.5 font-mono text-[10px] text-slate-300">IoT</span></div>
+            <span class="mt-7 inline-flex w-fit items-center gap-2 text-sm font-semibold text-slate-300">Project repository</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-5 py-24 sm:px-8 lg:py-28">
+        <div class="relative overflow-hidden rounded-2xl border border-mint/15 bg-[#0e1718] px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
+          <div aria-hidden="true" class="absolute -right-10 -top-28 h-72 w-72 rounded-full bg-mint/[.08] blur-[90px]"></div>
+          <div class="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[.2em] text-mint">04 / Contact</p>
+              <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-5xl">Have an idea?<br><span class="text-slate-500">Let's make it real.</span></h2>
+              <p class="mt-5 max-w-lg text-sm leading-6 text-muted">I'm always interested in thoughtful projects, collaborations, and conversations about technology.</p>
+            </div>
+            <a href="mailto:segnimamo737@gmail.com" class="inline-flex w-fit items-center gap-3 rounded-lg bg-mint px-5 py-3.5 text-sm font-bold text-ink transition hover:bg-white">
+              Send me an email <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="relative mt-11 flex flex-wrap gap-x-7 gap-y-4 border-t border-white/[.08] pt-6 text-sm text-slate-400">
+            <span>GitHub</span>
+            <span>LinkedIn</span>
+            <a class="transition hover:text-mint" href="mailto:segnimamo737@gmail.com">Email <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-white/[.06]">
+    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+      <p>© <span id="current-year"></span> Segni Mamo. Built with curiosity.</p>
+      <a href="#home" class="inline-flex w-fit items-center gap-2 transition hover:text-mint">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <script>
+    // Keep the mobile menu accessible and close it after navigating.
+    const menuButton = document.getElementById("menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.getElementById("menu-icon");
+    const profileToggle = document.getElementById("profile-toggle");
+    const profileCard = document.getElementById("profile-card");
+    const profileClose = document.getElementById("profile-close");
+
+    function setProfileOpen(isOpen) {
+      profileCard.classList.toggle("hidden", !isOpen);
+      profileToggle.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    profileToggle.addEventListener("click", () => {
+      setProfileOpen(profileToggle.getAttribute("aria-expanded") !== "true");
+    });
+    profileClose.addEventListener("click", () => setProfileOpen(false));
+    document.addEventListener("click", (event) => {
+      if (!profileCard.contains(event.target) && !profileToggle.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setProfileOpen(false);
+    });
+
+    function setMenuOpen(isOpen) {
+      mobileMenu.classList.toggle("hidden", !isOpen);
+      document.body.classList.toggle("menu-open", isOpen);
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuIcon.innerHTML = isOpen
+        ? '<path stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/>'
+        : '<path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+
+    menuButton.addEventListener("click", () => {
+      setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+    document.querySelectorAll(".mobile-link").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
